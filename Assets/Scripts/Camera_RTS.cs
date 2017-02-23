@@ -14,8 +14,8 @@ public class Camera_RTS : MonoBehaviour {
 
 		zoomSpeed = 1.0f;
 		moveSpeed = 0.5f;
-		mouseMargin = 0.1f;
-		rotationSpeed = 1.0f;
+		mouseMargin = 1.0f;
+		rotationSpeed = 2.0f;
 		rotating = false;
 
 		transform.position = new Vector3(0.0f, 5.0f);
@@ -33,7 +33,7 @@ public class Camera_RTS : MonoBehaviour {
 		{
 			transform.position -= transform.right * moveSpeed;
 		}
-		else if ((Input.mousePosition.x >= Screen.width + mouseMargin && !rotating) || Input.GetKey(KeyCode.D))
+		else if ((Input.mousePosition.x >= Screen.width - mouseMargin && !rotating) || Input.GetKey(KeyCode.D))
 		{
 			transform.position += transform.right * moveSpeed;
 		}
@@ -42,7 +42,7 @@ public class Camera_RTS : MonoBehaviour {
 		{
 			transform.position -= new Vector3(transform.forward.x, 0.0f, transform.forward.z) * moveSpeed;
 		}
-		else if ((Input.mousePosition.y >= Screen.height + mouseMargin && !rotating) || Input.GetKey(KeyCode.W))
+		else if ((Input.mousePosition.y >= Screen.height - mouseMargin && !rotating) || Input.GetKey(KeyCode.W))
 		{
 			transform.position += new Vector3(transform.forward.x, 0.0f, transform.forward.z) * moveSpeed;
 		}
