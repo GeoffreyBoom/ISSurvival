@@ -65,7 +65,10 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\Camera_RTS.cs" />
     <Compile Include="Assets\Scripts\Camera_TPS.cs" />
+    <Compile Include="Assets\Scripts\EnemyBehaviour.cs" />
     <Compile Include="Assets\Scripts\PlayerTestMovement.cs" />
+    <Compile Include="Assets\Scripts\RTSInterface.cs" />
+    <Compile Include="Assets\Scripts\ResourceBehaviour.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\SyntaxTree\UnityVS\2015\UnityVS.CSharp.targets" />
 </Project>
