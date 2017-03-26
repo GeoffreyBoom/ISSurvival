@@ -10,15 +10,15 @@ public class NetworkManager : Photon.PunBehaviour {
 
     [SerializeField]
     string playerPrefabName = "";
-
-
+    [SerializeField]
+    string queenPrefabName = "";
 
     // Use this for initialization
-    void Start () {
+    void Start ()
+    {
 
         PhotonNetwork.ConnectUsingSettings(VERSION);
         PhotonNetwork.autoJoinLobby = true;
-
     }
 
     void OnGUI()
@@ -30,18 +30,13 @@ public class NetworkManager : Photon.PunBehaviour {
     public override void OnJoinedLobby()
     {
         PhotonNetwork.JoinRandomRoom();
-        //create a room for multiplayer:
-      /*  RoomOptions roomOptions = new RoomOptions();
-        roomOptions.IsVisible = false;
-        roomOptions.MaxPlayers = 2; // 2 player per room 
-        PhotonNetwork.JoinOrCreateRoom(roomName, roomOptions, TypedLobby.Default);*/
     }
 
 
     void OnPhotonRandomJoinFailed()
     {
 
-        Debug.Log("Can't join random room!  DON'T MIND ME, I'LL JUST MAKE MY OWN ROOM.");
+     //   Debug.Log("Can't join random room!  DON'T MIND ME, I'LL JUST MAKE MY OWN ROOM.");
         PhotonNetwork.CreateRoom(null);
     }
 
@@ -49,15 +44,16 @@ public class NetworkManager : Photon.PunBehaviour {
     //Spawn player:
     void OnJoinedRoom()
     {
-
-        Debug.Log(DataHolder.player);
          
         if (DataHolder.player == false)
         {
-            Debug.Log("I am here");
-        //when we want to instantiate objects that we want ALL player to see:
-        PhotonNetwork.Instantiate(playerPrefabName, this.transform.position, this.transform.rotation, 0);
+        //when we want to instantiate objects that we want ALL players to see:
+           PhotonNetwork.Instantiate(playerPrefabName, this.transform.position, this.transform.rotation, 0);
         }
-    
+        else
+        {
+            PhotonNetwork.Instantiate(queenPrefabName, this.transform.position + new Vector3(2,0,2), this.transform.rotation, 0);
+        }
+
     }
 }

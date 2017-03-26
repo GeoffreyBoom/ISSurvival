@@ -20,7 +20,7 @@ public class FollowTarget : MonoBehaviour {
         }
         else if(DataHolder.player){
             // follow the RTS camera: 
-            transform.position = GameObject.FindGameObjectWithTag("RTS").transform.position + mOffset;
+            transform.position = GameObject.FindGameObjectWithTag("MainCamera").transform.position + mOffset;
 
         }
     }

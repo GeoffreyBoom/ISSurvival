@@ -22,8 +22,8 @@ public class Instantiator : MonoBehaviour {
 
             currentCamera.enabled = true;
 
-            GameObject.Find("RTS").gameObject.SetActive(false); 
-
+            GameObject.Find("RTS").gameObject.SetActive(false);
+            GameObject.Find("RTSInterface").gameObject.SetActive(false);
          }
         else 
         {
