@@ -58,4 +58,10 @@ public class Camera_RTS : MonoBehaviour {
 			rotating = false;
 		}
 	}
+
+    public void changeCameraTarget(GameObject target)
+    {
+        transform.position = target.transform.position + Vector3.up * 10;
+        transform.forward = (target.transform.position - transform.position).normalized;
+    }
 }

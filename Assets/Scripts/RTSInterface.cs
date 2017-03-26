@@ -16,6 +16,8 @@ public class RTSInterface : MonoBehaviour {
     bool patrol = false;
     bool multipleEnemiesSelected;
 
+    int index = 0;
+
     string moveOrPatrolString = "MOVE";
 
     EnemyBehaviour currentlyControlledEnemy;
@@ -26,6 +28,7 @@ public class RTSInterface : MonoBehaviour {
         enemies.AddRange(FindObjectsOfType<EnemyBehaviour>());
         flocks = new List<FlockBehaviour>();
         newFlock = new List<EnemyBehaviour>();
+        cam = FindObjectOfType<Camera_RTS>();
     }
 	
 	// Update is called once per frame
@@ -38,9 +41,14 @@ public class RTSInterface : MonoBehaviour {
     {
         if (Input.GetKeyDown(KeyCode.P))
         {
-            patrol = !patrol;
+            MoveOrPatrolBtnClicked();
         }
-        if (Input.GetKeyDown(KeyCode.I))
+        if (Input.GetKeyDown(KeyCode.N))
+        {
+            FindNextClicked();
+        }
+
+            if (Input.GetKeyDown(KeyCode.I))
         {
             if (multipleEnemiesSelected)
             {
@@ -228,6 +236,21 @@ public class RTSInterface : MonoBehaviour {
         moveOrPatrolString = temp;
 
     }
+    public void FindNextClicked()
+    {
+        int prevIndex = index;
+
+        while ((++index) % enemies.Count != prevIndex)
+        {
+            index = index % enemies.Count;
+            if (enemies[index].currentState == EnemyBehaviour.State.Idle)
+            {
+                cam.changeCameraTarget(enemies[index].gameObject);
+                break;
+            }
+        }
+    }
+
     public void GotResource()
     {
         Text crystalText = this.GetComponentsInChildren<Text>()[1];
