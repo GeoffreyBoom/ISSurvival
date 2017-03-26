@@ -22,7 +22,7 @@ public class Instantiator : MonoBehaviour {
 
             currentCamera.enabled = true;
 
-            GameObject.Find("RTS").GetComponent<Camera>().enabled = false;
+            GameObject.Find("RTS").gameObject.SetActive(false); 
 
          }
         else 
@@ -31,7 +31,8 @@ public class Instantiator : MonoBehaviour {
 
             currentCamera.enabled = true;
 
-            GameObject.Find("TPS").GetComponent<Camera>().enabled = false;
+            GameObject.Find("TPS").gameObject.SetActive(false);
+
         }
     }
 }

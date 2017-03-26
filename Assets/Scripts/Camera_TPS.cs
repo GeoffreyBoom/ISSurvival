@@ -14,7 +14,7 @@ public class Camera_TPS : MonoBehaviour
 
 	void Start () {
 
-        cameraPlayer = GameObject.FindGameObjectWithTag("MainCamera"); 
+        cameraPlayer = GameObject.FindGameObjectWithTag("TPS"); 
 
         rotationSpeed = 1.0f;
         zoomSpeed = 1.0f;
