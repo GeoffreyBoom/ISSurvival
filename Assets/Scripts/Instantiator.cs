@@ -24,6 +24,7 @@ public class Instantiator : MonoBehaviour {
 
             GameObject.Find("RTS").gameObject.SetActive(false);
             GameObject.Find("RTSInterface").gameObject.SetActive(false);
+            GameObject.Find("Mini Map RTS").gameObject.SetActive(false);
          }
         else 
         {
@@ -32,6 +33,8 @@ public class Instantiator : MonoBehaviour {
             currentCamera.enabled = true;
 
             GameObject.Find("TPS").gameObject.SetActive(false);
+            //GameObject.Find("TPSInterface").gameObject.SetActive(false);
+            GameObject.Find("Mini Map TPS").gameObject.SetActive(false);
 
         }
     }
