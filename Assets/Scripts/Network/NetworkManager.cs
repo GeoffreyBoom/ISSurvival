@@ -42,7 +42,7 @@ public class NetworkManager : Photon.PunBehaviour {
 
 
     //Spawn player:
-    void OnJoinedRoom()
+    public override void OnJoinedRoom()
     {
          
         if (DataHolder.player == false)
