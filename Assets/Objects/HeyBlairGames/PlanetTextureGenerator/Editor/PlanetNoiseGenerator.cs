@@ -65,7 +65,7 @@ namespace HeyBlairGames.PlanetTextureGenerator.Editor
 					}
 					else
 					{
-						Debug.LogError( "couldn't load " + computeShaderPath );
+						//Debug.LogError( "couldn't load " + computeShaderPath );
 						useComputerShader = false;
 					}
 				}

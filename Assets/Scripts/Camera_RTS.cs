@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Camera_RTS : MonoBehaviour {
+public class Camera_RTS : MonoBehaviour
+{
 
 	float zoomSpeed;
 	float moveSpeed;
@@ -25,8 +26,9 @@ public class Camera_RTS : MonoBehaviour {
 	
 	void Update () {
 
-		//Zoom
-		transform.position += transform.forward * Input.GetAxis("Mouse ScrollWheel") * zoomSpeed;
+
+        //Zoom
+        transform.position += transform.forward * Input.GetAxis("Mouse ScrollWheel") * zoomSpeed;
 
 		//Mouse & keyboard movement
 		if ((Input.mousePosition.x <= mouseMargin && !rotating) || Input.GetKey(KeyCode.A))
@@ -58,4 +60,10 @@ public class Camera_RTS : MonoBehaviour {
 			rotating = false;
 		}
 	}
+
+    public void changeCameraTarget(GameObject target)
+    {
+        transform.position = target.transform.position + Vector3.up * 10;
+        transform.forward = (target.transform.position - transform.position).normalized;
+    }
 }

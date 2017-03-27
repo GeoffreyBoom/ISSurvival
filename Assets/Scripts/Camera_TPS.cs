@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Camera_TPS : MonoBehaviour {
+public class Camera_TPS : MonoBehaviour
+{
 
-	[SerializeField]
-	GameObject player;
+	private GameObject cameraPlayer = null;
 
 	float rotationSpeed;
 	float zoomSpeed;
@@ -14,35 +14,43 @@ public class Camera_TPS : MonoBehaviour {
 
 	void Start () {
 
-		rotationSpeed = 1.0f;
-		zoomSpeed = 1.0f;
+        cameraPlayer = GameObject.FindGameObjectWithTag("TPS"); 
 
-		transform.SetParent(player.transform);
-		transform.position = player.transform.position - (2.0f * player.transform.forward) + (2.0f * Vector3.up);
-		transform.forward = player.transform.forward + Vector3.down * 0.5f;
+        rotationSpeed = 1.0f;
+        zoomSpeed = 1.0f;
 
-		minAngleY = transform.rotation.eulerAngles.x - 20.0f;
-		maxAngleY = transform.rotation.eulerAngles.x + 20.0f;
+        cameraPlayer.transform.SetParent(this.transform);
+        cameraPlayer.transform.position = this.transform.position - (2.0f * this.transform.forward) + (2.0f * Vector3.up);
+        cameraPlayer.transform.forward = this.transform.forward + Vector3.down * 0.5f;
+
+        minAngleY = transform.rotation.eulerAngles.x - 20.0f;
+        maxAngleY = transform.rotation.eulerAngles.x + 20.0f;
+
 	}
 	
 	void Update () {
 
-		//Zoom
-		transform.position += transform.forward * Input.GetAxis("Mouse ScrollWheel") * zoomSpeed;
+        if(cameraPlayer != null)
+        {
 
-		//X-rotation
-		transform.RotateAround(player.transform.position, Vector3.up, Input.GetAxis("Mouse X") * rotationSpeed);
+           //Zoom
+            transform.position += transform.forward * Input.GetAxis("Mouse ScrollWheel") * zoomSpeed;
 
-		//Y-rotation
-		if ((transform.rotation.eulerAngles.x >= minAngleY && transform.rotation.eulerAngles.x <= maxAngleY)
-			|| (transform.rotation.eulerAngles.x > maxAngleY && Input.GetAxis("Mouse Y") < 0.0f)
-			|| (transform.rotation.eulerAngles.x < minAngleY && Input.GetAxis("Mouse Y") > 0.0f))
-		{
-			transform.RotateAround(player.transform.position, transform.right, Input.GetAxis("Mouse Y") * rotationSpeed);
-		}
+            //X-rotation
+            transform.RotateAround(this.transform.position, Vector3.up, Input.GetAxis("Mouse X") * rotationSpeed);
 
-		//Lock Z-rotation
-		Vector3 rotationEuler = new Vector3(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y, 0.0f);
-		transform.eulerAngles = rotationEuler;
+            //Y-rotation
+            if ((transform.rotation.eulerAngles.x >= minAngleY && transform.rotation.eulerAngles.x <= maxAngleY)
+                || (transform.rotation.eulerAngles.x > maxAngleY && Input.GetAxis("Mouse Y") < 0.0f)
+                || (transform.rotation.eulerAngles.x < minAngleY && Input.GetAxis("Mouse Y") > 0.0f))
+            {
+                transform.RotateAround(this.transform.position, transform.right, Input.GetAxis("Mouse Y") * rotationSpeed);
+            }
+
+            //Lock Z-rotation
+            Vector3 rotationEuler = new Vector3(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y, 0.0f);
+            transform.eulerAngles = rotationEuler;
+        }
+
 	}
 }
