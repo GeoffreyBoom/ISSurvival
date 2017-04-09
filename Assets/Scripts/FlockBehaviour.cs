@@ -5,8 +5,8 @@ using System.Collections.Generic;
 public class FlockBehaviour {
 
     //taken from lab 3
-    //float repulsionQueryRadius = 5.0f;
-    //float cohesionQueryRadius = 10.0f;
+    float repulsionQueryRadius = 5.0f;
+    float cohesionQueryRadius = 10.0f;
     public float cohesionFactor = 1.5f;
     public float repulsionFactor = 2.0f;
     //float alignmentFactor = 1.0f;
@@ -40,15 +40,23 @@ public class FlockBehaviour {
         Vector3 avgPos = new Vector3(0.0f, 0.0f, 0.0f);
         foreach (EnemyBehaviour en in enemies)
         {
-            avgPos += en.transform.position;
+            avgPos += en.transform.position;   
         }
         avgPos /= enemies.Count;
         foreach (EnemyBehaviour en in enemies)
         {
+            Vector3 accel = Vector3.zero;
             //cohesion
-            Vector3 accel = (avgPos - en.transform.position) * cohesionFactor;
+            if((avgPos - en.transform.position).magnitude >= cohesionQueryRadius)
+            {
+                accel += (avgPos - en.transform.position) * cohesionFactor;
+            }
+
             //repulsion
-            accel += -(avgPos - en.transform.position) * repulsionFactor;
+            if ((avgPos - en.transform.position).magnitude < repulsionQueryRadius)
+            {
+                accel += -(avgPos - en.transform.position) * repulsionFactor;
+            }
             //apply
             en.flockAcceleration = accel;
         }

@@ -285,7 +285,7 @@ public class EnemyBehaviour : MonoBehaviour {
         Debug.Log("Hit");
         if (col.gameObject.name.Equals("Resource"))
         {
-            Debug.Log("Hit by player");
+            Debug.Log("Hit by npc");
             inter.GotResource();
         }
     }
