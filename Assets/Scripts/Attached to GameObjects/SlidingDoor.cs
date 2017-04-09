@@ -18,7 +18,7 @@ public class SlidingDoor : MonoBehaviour {
 
     void OnTriggerEnter(Collider other)
     {
-        if (GameObject.FindGameObjectWithTag("Player") || GameObject.FindGameObjectWithTag("Alien") || GameObject.FindGameObjectWithTag("Queen"))
+        if (other.gameObject.tag == "Player" || other.gameObject.tag == "Alien" || other.gameObject.tag == "Queen")
         {
             Debug.Log("opening "+ anim.GetBool("isOpen").ToString());
 
@@ -27,13 +27,12 @@ public class SlidingDoor : MonoBehaviour {
             doorAudio.Play();
 
         }
-
     }
 
 
     void OnTriggerExit(Collider other)
     {
-        if (GameObject.FindGameObjectWithTag("Player") || GameObject.FindGameObjectWithTag("Alien") || GameObject.FindGameObjectWithTag("Queen"))
+        if (other.gameObject.tag == "Player" || other.gameObject.tag == "Alien" || other.gameObject.tag == "Queen")
         {
             Debug.Log("closing "+ anim.GetBool("isOpen").ToString());
 

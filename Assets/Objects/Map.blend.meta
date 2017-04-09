@@ -1,52 +1,22 @@
 fileFormatVersion: 2
 guid: 6b5aeff26ffa103478fb22852c8ce80a
-timeCreated: 1490558427
+timeCreated: 1491766846
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
   fileIDToRecycleName:
     100000: HUB_Floor
-    100002: HUB_Walls
-    100004: //RootNode
-    100006: NorthEastWingFloor
-    100008: NorthEastWingWalls
-    100010: NorthWestWingFloor
-    100012: NorthWestWingWalls
-    100014: SouthWestWingFloor
-    100016: SouthWestWingWalls
+    100002: //RootNode
+    100004: SouthWestWingWalls
     400000: HUB_Floor
-    400002: HUB_Walls
-    400004: //RootNode
-    400006: NorthEastWingFloor
-    400008: NorthEastWingWalls
-    400010: NorthWestWingFloor
-    400012: NorthWestWingWalls
-    400014: SouthWestWingFloor
-    400016: SouthWestWingWalls
+    400002: //RootNode
+    400004: SouthWestWingWalls
     2300000: HUB_Floor
-    2300002: HUB_Walls
-    2300004: NorthEastWingFloor
-    2300006: NorthEastWingWalls
-    2300008: NorthWestWingFloor
-    2300010: NorthWestWingWalls
-    2300012: SouthWestWingFloor
-    2300014: SouthWestWingWalls
+    2300002: SouthWestWingWalls
     3300000: HUB_Floor
-    3300002: HUB_Walls
-    3300004: NorthEastWingFloor
-    3300006: NorthEastWingWalls
-    3300008: NorthWestWingFloor
-    3300010: NorthWestWingWalls
-    3300012: SouthWestWingFloor
-    3300014: SouthWestWingWalls
+    3300002: SouthWestWingWalls
     4300000: HUB_Floor
-    4300002: SouthWestWingFloor
-    4300004: NorthWestWingFloor
-    4300006: NorthEastWingFloor
-    4300008: SouthWestWingWalls
-    4300010: NorthWestWingWalls
-    4300012: NorthEastWingWalls
-    4300014: HUB_Walls
+    4300002: SouthWestWingWalls
     7400000: Default Take
     9500000: //RootNode
   materials:
