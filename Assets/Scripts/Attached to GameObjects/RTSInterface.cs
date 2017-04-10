@@ -151,7 +151,8 @@ public class RTSInterface : MonoBehaviour {
                 }
                 else if (hit.rigidbody != null)
                 {
-                    Debug.Log("has target");
+                    
+                    Debug.Log("has target " + "(selected is " + hit.collider.gameObject.name + ")");
 
                     target = new Vector3(hit.point.x, 2.0f, hit.point.z);
                     if (multipleEnemiesSelected)

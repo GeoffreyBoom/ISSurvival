@@ -30,7 +30,10 @@ public class EnemyBehaviour : MonoBehaviour {
     public List<Vector3> futurTargets;
 
     RTSInterface inter;
-	
+
+
+    public Vector3 velocity; 
+
     // Use this for initialization
 	void Start () {
         clearAllFutur();
@@ -162,7 +165,7 @@ public class EnemyBehaviour : MonoBehaviour {
         }
     }
 
-    bool moving()
+    public bool moving()
     {
         //the direction in which to move
         Vector3 direction = (target - transform.position).normalized;
@@ -191,7 +194,6 @@ public class EnemyBehaviour : MonoBehaviour {
             else
             {
                 //move to target
-                Vector3 velocity = Vector3.zero;
                 //if before the near radius
                 if (dist > nearRadius)
                 {
@@ -288,6 +290,11 @@ public class EnemyBehaviour : MonoBehaviour {
             Debug.Log("Hit by npc");
             inter.GotResource();
         }
+    }
+
+    public Vector3 getTarget()
+    {
+        return target; 
     }
 }
 

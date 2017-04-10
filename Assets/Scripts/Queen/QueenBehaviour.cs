@@ -1,8 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon; 
 
-public class QueenBehaviour : MonoBehaviour
+
+public class QueenBehaviour : Photon.MonoBehaviour
 {
 
     LineRenderer line;
@@ -12,6 +14,7 @@ public class QueenBehaviour : MonoBehaviour
     float speed = 4.0f;
     [SerializeField]
     public int numOfEggs = 1;
+    bool movingState = false;
 
     public static bool isOn = false;
 
@@ -69,6 +72,12 @@ public class QueenBehaviour : MonoBehaviour
         }
 
 
+        if(movingState == true)
+        {
+            Debug.Log("FUCK YOU");
+            GetComponent<EnemyBehaviour>().moving();
+        }
+
         //If line renderer was drawn for the Queen's egg spawning circonference:
         if (isOn)
         {
@@ -90,26 +99,75 @@ public class QueenBehaviour : MonoBehaviour
 
     void getMouseInputs()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (this.transform.position == GetComponent<EnemyBehaviour>().getTarget())
+        {
+            movingState = false;
+        }
+
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            moveQueen();
+        }
+
+        if (Input.GetMouseButtonDown(1) && movingState == false)
         {
 
-            RaycastHit hit;
+            RaycastHit hit = new RaycastHit();
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
             if (Physics.Raycast(ray, out hit))
             {
-                if (hit.rigidbody.gameObject.tag.Equals("Queen"))
+                if (hit.rigidbody  != null)
                 {
-                    drawPoints = true;
+                    if (hit.rigidbody.gameObject.tag == "Queen")
+                    {
+                        drawPoints = true;
+                    }
                 }
+
             }
             
         }
     }
 
+    void moveQueen()
+    {
+        if (isOn == false)
+        {
+            RaycastHit hit = new RaycastHit();
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+            if (Physics.Raycast(ray, out hit))
+            {
+                Debug.Log("I AM HERE");
+               GetComponent<EnemyBehaviour>().assignTarget(new Vector3(hit.transform.position.x, transform.position.y , hit.transform.position.z));
+               movingState = true;
+            }
+        }
+    }
+
+    void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+        if (stream.isWriting)
+        {
+            // We own this player: send the others our data
+            stream.SendNext(transform.position);
+            stream.SendNext(transform.rotation);
+
+        }
+        else
+        {
+            // Network player, receive data
+            transform.position = (Vector3)stream.ReceiveNext();
+            transform.rotation = (Quaternion)stream.ReceiveNext();
+
+        }
+    }
+
+
     void CreatePoints(float increment)
     {
-        line.numPositions = (100 + 1);
+        line.positionCount = (100 + 1);
         line.useWorldSpace = false;
         float x;
         float z;
