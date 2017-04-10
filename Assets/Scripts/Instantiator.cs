@@ -33,7 +33,7 @@ public class Instantiator : MonoBehaviour {
             currentCamera.enabled = true;
 
             GameObject.Find("TPS").gameObject.SetActive(false);
-            //GameObject.Find("TPSInterface").gameObject.SetActive(false);
+            GameObject.Find("TPSInterface").gameObject.SetActive(false);
             GameObject.Find("Mini Map TPS").gameObject.SetActive(false);
 
         }

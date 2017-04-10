@@ -143,7 +143,14 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 			// which affects the movement speed because of the root motion.
 			if (m_IsGrounded && move.magnitude > 0)
 			{
-				m_Animator.speed = m_AnimSpeedMultiplier;
+                if(Input.GetKey(KeyCode.LeftShift))
+                {
+                    m_Animator.speed = 2;
+                }
+                else
+                {
+                    m_Animator.speed = m_AnimSpeedMultiplier;
+                }
 			}
 			else
 			{
