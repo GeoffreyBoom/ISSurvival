@@ -7,7 +7,7 @@ public class Bullet : MonoBehaviour {
 	float StartTimestamp;
 
 	[SerializeField]
-	float LifeTime = 2000;
+	float LifeTime = 10000;
 	[SerializeField]
 	Rigidbody rigid;
 
@@ -27,7 +27,7 @@ public class Bullet : MonoBehaviour {
 		}
 	}
 
-	void SetInitialAcceleration(float velocity, Vector3 position, Vector3 direction)
+	public void SetInitialAcceleration(float velocity, Vector3 position, Vector3 direction)
 	{
 		transform.position = position;
 		transform.forward = direction;

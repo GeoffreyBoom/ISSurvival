@@ -168,7 +168,7 @@ public class QueenBehaviour : Photon.MonoBehaviour
     void CreatePoints(float increment)
     {
         
-        line.positionCount = (100 + 1);
+        //line.positionCount = (100 + 1);
         line.useWorldSpace = false;
         float x;
         float z;
