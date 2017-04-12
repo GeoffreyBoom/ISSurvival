@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class CameraControl : MonoBehaviour {
 
@@ -11,8 +12,16 @@ public class CameraControl : MonoBehaviour {
     [SerializeField]
     float smoothSpeedCam = 0.1f;
 
+    GameObject construction; 
+
+    
     AsyncOperation loadLevelCompletely;
 
+    void Awake()
+    {
+        construction = GameObject.Find("Construction");
+        construction.SetActive(false);
+    }
 
     // Update is called once per frame
     void Update ()
@@ -24,6 +33,17 @@ public class CameraControl : MonoBehaviour {
     public void setNextSpace(Transform nextSpace)
     {     
         camPosAndRot = nextSpace;
+    }
+
+
+    public void inConstruction()
+    {
+        construction.SetActive(true);
+    }
+
+    public void desactivateConstruction()
+    {
+        construction.SetActive(false);
     }
 
     //Make sure that the scene is fully loaded before doing anything else: 

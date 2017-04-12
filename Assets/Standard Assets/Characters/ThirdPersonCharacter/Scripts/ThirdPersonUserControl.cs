@@ -61,13 +61,13 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             else
             {
                 // we use world-relative directions in the case of no main camera
-                m_Move = v*Vector3.forward + h*Vector3.right;
+                m_Move = v*m_Character.transform.forward + h*m_Character.transform.right;
             }
 #if !MOBILE_INPUT
 			// walk speed multiplier
 	        if (Input.GetKey(KeyCode.LeftShift))
             {
-                m_Move *= 1.5f;
+                m_Move *= 1.2f;
             }       
 #endif
 
