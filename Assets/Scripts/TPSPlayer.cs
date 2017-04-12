@@ -18,7 +18,7 @@ public class TPSPlayer : MonoBehaviour {
 		
 	}
 
-    void TakeDamage()
+    public void TakeDamage()
     {
 
     }
