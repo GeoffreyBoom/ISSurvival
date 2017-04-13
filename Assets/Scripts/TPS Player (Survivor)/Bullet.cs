@@ -2,55 +2,40 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Photon;
+using UnityStandardAssets.Characters.ThirdPerson;
+
 
 public class Bullet : Photon.MonoBehaviour {
 
-	float StartTimestamp;
+    public ThirdPersonCharacter player;
+    Rigidbody bullet;
+    Vector3 initPos;
+    float mSpeed = 30.0f;
 
-	[SerializeField]
-	float LifeTime = 10000;
-	[SerializeField]
-	Rigidbody rigid;
+    void Awake()
+    {
+        // Must be done in Awake() because SetDirection() will be called early. Start() won't work.
+        bullet = GetComponent<Rigidbody>();
+        initPos = bullet.transform.position;
+        // Set a default direction
+        bullet.velocity = transform.forward * mSpeed;
+    }
 
-	// Use this for initialization
-	void Start () {
-		StartTimestamp = Time.time;	
-	}
-
-	// Update is called once per frame
-	void Update()
+    // Update is called once per frame
+    void Update()
 	{
-        //NOT SURE IF THIS MAKES THE BULLET CHANGE POSITION?
-        SetInitialAcceleration(2.0f, this.transform.position, new Vector3(0, 0, 1));
-
-		if (Time.time - StartTimestamp < LifeTime)
+        
+        if ((transform.position - initPos).magnitude > 30.0f)
 		{
 			Destroy(this.gameObject);
-		}
-	}
+		} 
+    }
 
-	public void SetInitialAcceleration(float velocity, Vector3 position, Vector3 direction)
-	{
-		transform.position = position;
-		transform.forward = direction;
-		if (rigid == null)
-		{
-			rigid = gameObject.GetComponent<Rigidbody>();
-		}
-		if (rigid != null)
-		{
-			rigid.velocity = transform.forward.normalized * velocity;
-		}
-		else
-		{
-			print("bullet does not have RigidBody");
-		}
-	}
 	void OnTriggerEnter(Collider other)
 	{
 
 		//TODO: implement the behavior for networking.
-		if (other.gameObject.tag == "Queen" || other.gameObject.tag == "Alien")
+		if (other.gameObject.tag == "Queen" || other.gameObject.tag == "Alien" || other.gameObject.tag == "Environment" /*|| other.gameObject.tag == "Floor"*/)
 		{
             photonView.RPC("deleteThis", PhotonTargets.MasterClient, this.gameObject.name);
 		}

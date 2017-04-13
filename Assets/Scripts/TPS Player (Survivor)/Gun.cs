@@ -1,36 +1,56 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityStandardAssets.Characters.ThirdPerson;
+using Photon;
 
-public class Gun : MonoBehaviour {
+public class Gun : Photon.MonoBehaviour {
 
 	[SerializeField]
 	Transform gun = null;
 	[SerializeField]
 	GameObject bullet = null;
 
-	// Use this for initialization
-	void Start () {
-		if(gun == null)
-		{
-			print("gun is null");
-		}
-		if (bullet == null)
-		{
-			print("bullet is null");
-		}
-	}
+    public ThirdPersonCharacter player;
+    Bullet b;
+    Vector3 pos;
+    float nextFire, fireRate = 0.2f;
 
-	float velocity = 5;
 	// Update is called once per frame
 	void Update () {
-		if (gun != null && bullet != null)
-		{
-			if (Input.GetMouseButton(0))
-			{
-				Bullet b = Instantiate(bullet).GetComponent<Bullet>();
-				b.SetInitialAcceleration(velocity, gun.position + gun.forward.normalized*1, gun.forward);
-			}
-		}
-	}
+        
+    }
+
+    public void Fire()
+    {
+        if (Time.time > nextFire)
+        {
+            nextFire = Time.time + fireRate;
+
+            if (player.transform.position.z >= 0)
+            {
+                if (player.transform.position.x >= 0)
+                {
+                    pos = gun.transform.position + new Vector3(0.2f, 0f, 0.2f);
+                }
+                else
+                {
+                    pos = gun.transform.position + new Vector3(-0.2f, 0f, 0.2f);
+                }
+            }
+            else if (player.transform.position.z < 0)
+            {
+                if (player.transform.position.x >= 0)
+                {
+                    pos = gun.transform.position + new Vector3(0.2f, 0f, -0.2f);
+                }
+                else
+                {
+                    pos = gun.transform.position + new Vector3(-0.2f, 0f, -0.2f);
+                }
+            }
+
+            PhotonNetwork.Instantiate("Bullet", pos, player.transform.rotation, 0);
+        }
+    }
 }
