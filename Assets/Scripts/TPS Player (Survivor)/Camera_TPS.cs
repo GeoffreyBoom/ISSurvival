@@ -40,18 +40,18 @@ public class Camera_TPS : Photon.MonoBehaviour
             //X-rotation
             transform.RotateAround(this.transform.position, Vector3.up, Input.GetAxis("Mouse X") * rotationSpeed);
 
-            //Y-rotation
+			/*//Y-rotation
             if ((transform.rotation.eulerAngles.x >= minAngleY && transform.rotation.eulerAngles.x <= maxAngleY)
                 || (transform.rotation.eulerAngles.x > maxAngleY && Input.GetAxis("Mouse Y") < 0.0f)
                 || (transform.rotation.eulerAngles.x < minAngleY && Input.GetAxis("Mouse Y") > 0.0f))
             {
                 transform.RotateAround(this.transform.position, transform.right, Input.GetAxis("Mouse Y") * rotationSpeed);
             }
-
+			*/
             //Lock Z-rotation
             Vector3 rotationEuler = new Vector3(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y, 0.0f);
             transform.eulerAngles = rotationEuler;
         }
-
+		
 	}
 }
