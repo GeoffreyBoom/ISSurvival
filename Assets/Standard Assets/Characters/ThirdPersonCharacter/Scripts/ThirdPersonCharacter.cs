@@ -7,8 +7,8 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 	[RequireComponent(typeof(Animator))]
 	public class ThirdPersonCharacter : MonoBehaviour
 	{
-		[SerializeField] float m_MovingTurnSpeed = 360;
-		[SerializeField] float m_StationaryTurnSpeed = 180;
+		[SerializeField] float m_MovingTurnSpeed = 180;
+		[SerializeField] float m_StationaryTurnSpeed = 90;
 		[SerializeField] float m_JumpPower = 12f;
 		[Range(1f, 4f)][SerializeField] float m_GravityMultiplier = 2f;
 		[SerializeField] float m_RunCycleLegOffset = 0.2f; //specific to the character in sample assets, will need to be modified to work with others
@@ -143,7 +143,14 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 			// which affects the movement speed because of the root motion.
 			if (m_IsGrounded && move.magnitude > 0)
 			{
-				m_Animator.speed = m_AnimSpeedMultiplier;
+                if(Input.GetKey(KeyCode.LeftShift))
+                {
+                    m_Animator.speed = 1.2f;
+                }
+                else
+                {
+                    m_Animator.speed = m_AnimSpeedMultiplier;
+                }
 			}
 			else
 			{
