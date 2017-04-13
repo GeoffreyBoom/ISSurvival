@@ -100,7 +100,7 @@ public class selectAlien : MonoBehaviour {
 
     public void CreatePoints(float increment)
     {
-        line.positionCount = (numOfPoints + 1);
+        //line.positionCount = (numOfPoints + 1);
         line.useWorldSpace = false;
         float x;
         float z;
